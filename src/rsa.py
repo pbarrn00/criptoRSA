@@ -192,12 +192,23 @@ def rsa_decrypt(by: bytes, n: int, d: int) -> bytes:
 
 
 if __name__ == "__main__":
-    (n, e), d = rsa_keygen(25, 3)
-    message = "s¨Gfç"
-    message = "A: Смерть Ивана Ильича"
+
+    # Generate keys
+    #(n, e), d = rsa_keygen(25, 3)
+    (n, e), d = rsa_keygen(2048, 1048577) # 2 ** 20 + 1
+    print("Public key: ", (n, e))
+    print("Private key: ", d)
+
+    # Encrypt message
+    message = "A: Hello, B! How are you?"
     enc = message.encode("utf-16")
     encrypted = rsa_encrypt(enc, n, e)
+
+    # Decrypt message
     orig = rsa_decrypt(encrypted, n, d)
     ori = orig.decode("utf-16")
-    print(message)
-    print(ori)
+
+    # Print results  
+    print("Original message: ", message)
+    print("Encrypted message: ", encrypted)
+    print("Decrypted message: ", ori)
