@@ -57,8 +57,7 @@ def rsa_keygen(nlen: int = 2048, e: int = 2 ** 16 + 1, tries : int = 30000
     p_q_diff = 2 ** (nlen // 2 - 100)
     
     # Ensure we mimimize the probabilities of error in the primality test
-    #k = estimate_k(nlen, 2 ** - 128)
-    k = 12
+    k = estimate_k(nlen, 2 ** - 128)
     
     valid_d = False
     # d must not be too small and the number of bits of n must be exactly nlen

@@ -8,20 +8,23 @@ from decimal import Decimal
 from funcs import (
     blocks_from_bytes, power_mod, compute_block_size, bytes_from_block,
     estimate_k, bitlength, coprimes, random_probable_prime,
-    multiplicative_inverse, random_odd_number_nbits
+    multiplicative_inverse, random_odd_number_nbits, miller_rabin
 )
 
-def diffie_primes(nlen: int) -> tuple[int, int]:
+    # =========================================================================== #
+    #                                   PART a                                    #
+    # =========================================================================== #
+
+def diffie_primes(nlen: int, tries : int = 30000) -> tuple[int, int]:
     # This is a particularity of our implementation, we will see why
     if nlen < 8:
         raise ValueError("Number of bits of n must be greater than 8")    
 
     # NIST restrictions to ensure p and q are big enough but not too close
-    q_size = math.ceil(nlen / 2)
+    q_size = math.ceil(nlen / 2)                                                    # q_size = ???                      
     
     # Ensure we mimimize the probabilities of error in the primality test
-    #k = estimate_k(nlen, 2 ** - 128)
-    k = 12
+    k = estimate_k(nlen, 2 ** - 128)
 
     valid_p = False
 
@@ -29,18 +32,18 @@ def diffie_primes(nlen: int) -> tuple[int, int]:
 
         q = random_probable_prime(random_odd_number_nbits(q_size),
                                   k = k,
-                                  limit = 50)
+                                  limit = tries)
 
         p = (2 * q) + 1 
-        if(is_prime(p)):
+        
+        if(miller_rabin(p, k)):
             valid_p = True
             print("Q y P son coprimos:{}".format(coprimes(q, p)))
             print(q, p)
 
-    k = p-1
-    g = generate_generator(p)
+    g = generate_generator(p)       # Here p is a prime number
 
-    return p,g
+    return p,q,g
         
 def generate_generator(p: int) -> int:
     '''
@@ -54,19 +57,11 @@ def generate_generator(p: int) -> int:
     int
         Generator for G = Z/pZ*
     '''
-    
-    repetidos = list()
-    for i in range(2, p-1):
-        repetidos.append(i)
-
-    g = random.choice(repetidos)
-
-    while len(repetidos)!=0 and not is_generator(g, p):
-        repetidos.remove(g)
-        if len(repetidos)!=0:
-            g = random.choice(repetidos)
-        else:
-            print("No existe generador")
+    g = random.randint(2, p - 1)
+    while not is_generator(g, p):
+        g = random.randint(2, p - 1)
+        
+    print("Generador: {}".format(g))
     return g
 
 def is_generator(g: int, p: int) -> bool:
@@ -83,41 +78,17 @@ def is_generator(g: int, p: int) -> bool:
     bool
         True if the number is a generator, False otherwise.
     '''
-    if g < 2 or g >= p:
+    if g < 2 or g > p - 1:
         return False
-    for i in range(2, p):
-        if power_mod(g, i, p) == 1:
+
+    for n in range(1, p - 1):
+        if power_mod(g, n, p) == 1:
             return False
+
     return True
-  
-def is_prime(n):
-    '''
-    Checks if a number is prime
-    Parameters
-    ----------
-    n : int
-        Number to be checked
-    Returns
-    -------
-    bool
-        True if the number is prime, False otherwise.
-    '''
-    if n < 2:
-        return False
-    if n == 2:
-        return True
-    if n % 2 == 0:
-        return False
-    for i in range(3, int(n ** 0.5) + 1, 2):
-        if n % i == 0:
-            return False
-    return True
-
-
-
 
     # =========================================================================== #
-    # ============================== RFC FORMULA ================================ #
+    #                                   PART b                                    #
     # =========================================================================== #
 
 def Diffie_HellmanRFC(n: int)-> tuple[int, int]:
@@ -131,13 +102,43 @@ def Diffie_HellmanRFC(n: int)-> tuple[int, int]:
 
     return p,g
 
+    # =========================================================================== #
+    #                                   PART c                                    #
+    # =========================================================================== #
 
+def common_key(p: int, ga: int) -> int:
+    '''
+    Computes the common key for both parties
+    Parameters
+    ----------
+    p : int
+        Prime number
+    ga : int
+        Public key for Alice
+    Returns
+    -------
+    int
+        Common key
+    '''
+    aB = random.randint(2, p - 2)
+    return power_mod(ga, aB, p)
+
+
+    # =========================================================================== #
+    # =================================== MAIN ================================== #
     # =========================================================================== #
 
 if __name__ == '__main__':
-    # 1. Generate two random primes of 1024 bits
-    p, q = diffie_primes(32)
-    print(f'p = {p}, q = {q}')
+    # Part a) Implement a function to generate a random prime p of n bits and a random appropriate generator g for G = Z/pZ∗.
+    p, q, g= diffie_primes(10)
+    print("p: {} q: {} g: {}".format(p, q, g))
 
-    # Part b) Generator pre-computed
-    #print(f'g = {Diffie_HellmanRFC(1536)[1]}')
+    # Part b) Implement a function that returns a pair of p and g obtained from RFC 3526
+    p, g = Diffie_HellmanRFC(1536)
+    print("p: {} g: {}".format(p, g))
+
+    # Part c) Given p = 7883, g = 2 and a user with g^ai ≡ 1876 mod p, form a common key with that user.
+    p = 7883
+    ga = 1876
+    k = common_key(p, ga)
+    print("Common key for User: {}".format(k))
