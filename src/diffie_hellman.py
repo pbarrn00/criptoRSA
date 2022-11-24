@@ -6,9 +6,8 @@ import math
 import pi
 from decimal import Decimal
 from funcs import (
-    blocks_from_bytes, power_mod, compute_block_size, bytes_from_block,
-    estimate_k, bitlength, coprimes, random_probable_prime,
-    multiplicative_inverse, random_odd_number_nbits, miller_rabin
+    power_mod, estimate_k, coprimes, random_probable_prime,
+    random_odd_number_nbits, miller_rabin
 )
 
     # =========================================================================== #
@@ -43,7 +42,7 @@ def diffie_primes(nlen: int, tries : int = 30000) -> tuple[int, int]:
 
     g = generate_generator(p)       # Here p is a prime number
 
-    return p,q,g
+    return p, g
         
 def generate_generator(p: int) -> int:
     '''
@@ -130,8 +129,8 @@ def common_key(p: int, ga: int) -> int:
 
 if __name__ == '__main__':
     # Part a) Implement a function to generate a random prime p of n bits and a random appropriate generator g for G = Z/pZ∗.
-    p, q, g= diffie_primes(10)
-    print("p: {} q: {} g: {}".format(p, q, g))
+    p, g= diffie_primes(20)
+    print("p: {} g: {}".format(p, g))
 
     # Part b) Implement a function that returns a pair of p and g obtained from RFC 3526
     p, g = Diffie_HellmanRFC(1536)
