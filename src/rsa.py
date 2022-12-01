@@ -205,9 +205,12 @@ if __name__ == "__main__":
     delahera_e = 65537
 
     #(n, e), d = rsa_keygen(1024)
+    print("===========================================================")
     print("n:", barrio_n)
     print("e:", barrio_e)
     print("d:", barrio_d)
+    print("")
+    print("===========================================================")
     print("")
 
     # =========================================================================== #
@@ -219,7 +222,9 @@ if __name__ == "__main__":
     encrypted_barrio = rsa_encrypt(enc_barrio, delahera_n, delahera_e)
 
     print("Mi mensaje en claro: ", message_barrio)
-    print("Mi mensaje encriptado: ", encrypted_barrio)
+    print("\nMi mensaje encriptado: ", encrypted_barrio)
+    print("")
+    print("===========================================================")
 
     # =========================================================================== #
     # ============================ RSA DECRYPTION =============================== #
@@ -229,3 +234,5 @@ if __name__ == "__main__":
     decrypted_delahera = rsa_decrypt(encrypted_delahera, barrio_n, barrio_d)
 
     print("\nMensaje de De La Hera: ", decrypted_delahera.decode("utf-16"))
+    print("")
+    print("===========================================================")
