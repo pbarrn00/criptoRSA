@@ -4,6 +4,7 @@
 import random
 import math
 import pi
+import warnings
 from decimal import Decimal
 from funcs import (
     power_mod, estimate_k, coprimes, random_probable_prime,
@@ -18,6 +19,10 @@ def diffie_primes(nlen: int, tries : int = 30000) -> tuple[int, int]:
     # This is a particularity of our implementation, we will see why
     if nlen < 8:
         raise ValueError("Number of bits of n must be greater than 8")    
+    
+    if nlen not in [2048, 3072]:
+        warnings.warn("bitlen should be in [2048, 3072], got {}".format(nlen))
+
 
     # NIST restrictions to ensure p and q are big enough but not too close
     q_size = math.ceil(nlen / 2)                                                    # q_size = ???                      
@@ -42,7 +47,7 @@ def diffie_primes(nlen: int, tries : int = 30000) -> tuple[int, int]:
 
     g = generate_generator(p)       # Here p is a prime number
 
-    return p, g
+    return p, g, k
         
 def generate_generator(p: int) -> int:
     '''
@@ -129,7 +134,7 @@ def common_key(p: int, ga: int) -> int:
 
 if __name__ == '__main__':
     # Part a) Implement a function to generate a random prime p of n bits and a random appropriate generator g for G = Z/pZ∗.
-    p, g= diffie_primes(20)
+    p, g, k= diffie_primes(32)
     print("p: {} g: {}".format(p, g))
 
     # Part b) Implement a function that returns a pair of p and g obtained from RFC 3526
