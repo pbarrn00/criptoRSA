@@ -37,8 +37,8 @@ def elgamal_keygen(p: int, g: int) -> tuple:
         Public and private key
     '''
     ai = random.randint(2, p - 2)
-    pb = generate_public_key(p, g, ai)
-    return pb, ai
+    my_pk = generate_public_key(p, g, ai)
+    return my_pk, ai
 
 def elgamal_encrypt(by: bytes, g: int, k: int, pk_bob: int, p: int) -> tuple[int, bytes]:
     '''
@@ -176,18 +176,28 @@ def elgamal_decryption(by, pk: int, p: int, extract_blocks_size: int
 
 def main():
     # Generate p, g and public key
-    p, g, k= diffie_primes(32)
-    pb, ai = elgamal_keygen(p, g)
+    #p, g, k= diffie_primes(32)
+    #my_pk, ai = elgamal_keygen(p, g)
+
+    # Public key
+    p = 68507
+    g = 64136
+    my_pk =  44370
+
+    # Private key
+    ai =  44637
+    k =  63
     print("p: {}".format(p))
     print("g: {}".format(g))
-    print("My Public Key: {}".format(pb))
+    print("k: {}".format(k))
+    print("My Public Key: {}".format(my_pk))
     print("My Private Key: {}".format(ai))
 
-    # Bob public key
-    pk_bob = pb
+    # Bob's public key
+    pk_bob = my_pk
     
     # Message and encoded message
-    my_message = "Hello Dela"
+    my_message = "Hello Dela Welcome to Elgamal World"
     print("My message: {}".format(my_message))
     my_message_encoded = my_message.encode('utf-8')
     
