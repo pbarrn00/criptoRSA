@@ -40,7 +40,7 @@ def elgamal_keygen(p: int, g: int) -> tuple:
     my_pk = generate_public_key(p, g, ai)
     return my_pk, ai
 
-def elgamal_encrypt(by: bytes, g: int, k: int, pk_bob: int, p: int) -> list[tuple[int, bytes]]:
+def elgamal_encrypt(by: bytes, g: int, pk_bob: int, p: int) -> list[tuple[int, bytes]]:
     '''
     Encrypts a message using ElGamal
     Parameters
@@ -125,7 +125,7 @@ def elgamal_encryption(by: bytes, g: int, pk_bob: int, p: int, extract_blocks_si
     encryptions = []
 
     for block in blocks:
-        key = secrets.choice(range(1, p-1))
+        key = secrets.choice(range(2, p-1))
         C1 = power_mod(g, key, p)
         C2 = (block*power_mod(pk_bob, key, p))%p
         encryptions.append((C1, C2))
@@ -208,34 +208,37 @@ def main():
     #my_pk, ai = elgamal_keygen(p, g)
 
     # Public key
-    p = 68507
-    g = 64136
-    my_pk =  44370
+    p = 28499
+    g = 14249
+    my_pk = 14249
 
-    # Private key
-    ai =  44637
-    k =  63
+    # My Private key
+    ai = 44637
+    
     print("p: {}".format(p))
     print("g: {}".format(g))
-    print("k: {}".format(k))
     print("My Public Key: {}".format(my_pk))
     print("My Private Key: {}".format(ai))
 
     # Bob's public key
-    pk_bob = my_pk
+    p_bob = 68507
+    g_bob = 64136
+    pk_bob = 44370
     
     # Message and encoded message
-    my_message = "Hello Dela Welcome to Elgamal World"
+    my_message = "Hola muy buenas. Saludos desde mi casa"
     print("My message: {}".format(my_message))
     my_message_encoded = my_message.encode('utf-8')
     
+    bob_encoded_message = [(9724, b'\x01\x02\xeb'), (65831, b'\x00\xa1('), (46342, b'\x00\xf1\x02'), (64677, b'\x00\x944'), (48420, b'\x00x\xcd'), (41638, b'\x00\x03\xe8'), (58577, b'\x00}\xd8'), (38141, b'\x00\x7f\xa0'), (38872, b'\x00\x98\x8f'), (29880, b'\x00\x82\xd1'), (33541, b'\x00\xb6\x00'), (51857, b'\x00\x14\xd7'), (45537, b'\x00\x7f\xb5'), (28820, b'\x00\xd2\xf4'), (48484, b'\x01\x04\xc8'), (23053, b'\x00 R'), (37668, b'\x00\x18\xab'), (37723, b'\x00\xf7:'), (23084, b'\x00\xae\xa5')]
+    
     # Encrypt and decrypt a message
-    encrypted = elgamal_encrypt(my_message_encoded, g, k, pk_bob, p)
+    encrypted = elgamal_encrypt(my_message_encoded, g_bob, pk_bob, p_bob)
     print("Encrypted: "+str(encrypted))
 
-    decrypted = elgamal_decrypt(encrypted, p, ai)
+    decrypted = elgamal_decrypt(bob_encoded_message, p_bob, ai)
     message = decrypted.decode('utf-8')
-    print("Decrypted: "+str(message))
+    print("Bob Message Decrypted: "+str(message))
 
 if __name__ == "__main__":
     main()
