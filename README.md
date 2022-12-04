@@ -42,7 +42,10 @@ venv python 3.11 ~ Python 3.11.0rc1
 ## Indicaciones para la ejecución del portfolio 3 📖
 
 #### Ejecución del código 📱
-
+Para ejecutar el código se ha utilizado el entorno de desarrollos Virtual Studio pero simplemente se es ejecutar los archivos python con un comando:
+```
+/Path/to/Python/File/elgamal.py
+```
 
 ## Construido con 🛠️
 
