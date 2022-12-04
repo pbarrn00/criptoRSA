@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov  22 13:08:44 2022
+
+@author: Pablo Javier Barrio Navarro
+"""
 #ElGamal Implementation
 import random
 import secrets
