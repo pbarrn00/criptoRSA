@@ -106,6 +106,10 @@ def main():
     print("Hash del mensaje de Barrio: {}".format(hashed_message_barrio))
     print("")
 
+    message_encrypted_barrio = rsa_encrypt(message_barrio, delahera_n, delahera_e)
+    print("Mensaje encriptado de Barrio: {}".format(message_encrypted_barrio))
+    print("")
+
     signature_barrio = rsa_sign(hashed_message_barrio, barrio_n, barrio_d)
     print("Firma del mensaje de Barrio: {}".format(signature_barrio))
     print("")
@@ -115,8 +119,8 @@ def main():
     # ============================ RSA VERIFY =============================== #
     # =========================================================================== #
     
-    hashed_message_delahera = b'\xa5\x91\xa6\xd4\x0b\xf4 @J\x01\x173\xcf\xb7\xb1\x90\xd6,e\xbf\x0b\xcd\xa3+W\xb2w\xd9\xad\x9f\x14n'
-    print("Hash del mensaje de de la Hera: {}".format(hashed_message_delahera))
+    encrypted_message_delahera = b'\xa5\x91\xa6\xd4\x0b\xf4 @J\x01\x173\xcf\xb7\xb1\x90\xd6,e\xbf\x0b\xcd\xa3+W\xb2w\xd9\xad\x9f\x14n'
+    print("Mensaje de de la Hera: {}".format(encrypted_message_delahera))
     print("")
 
     signature_delahera = b'3\xe4\x90\xfd\xb6\x00>\xf2\xf1\x13\x82C\xbeC\x9c\xd6+K^\xf9\x0b\xbeGwU\xe4\xe1\x17sm\xa3\xfe\xe3eNq\x15\x0c\xda0\xef\xd8\x99\x1c:L\x19\xb2\x03\x93h\xe6p\xa1u\xde\x07\xa7$}\xf0r\x8e\x8dn}\xcf4\xfe.\x19\x90E$\x7fv3og\x0b\x15V\xb4\xff\x92I>\xc1K\x80\x1b\xdd\xbd\x9ay(\xf1\x1b\x89;;\xd5\xba\xf8\xe9\xae\x06\xe27ZA\xff\x96\n\x1b\x00\x81\x0cJ\xd06\x99@F\x8d\xd9\xeb\x9c\x8cVU\x94P4\x95\xd2"\xa80\x15\xa1{I\xcb>\x0c.J\xc5N\x08F\xe9\xe5$\xe6\xb1Lo9\xf5\x11\xf3\xbaU\x8e;y]\x8e\xbf\x0e\xef\x81\xd2\xd7\x16\xca\t\xef\xa0\xb7\xdb\'\x90%^\xb2\x14\xd9\xc2-\x88fn\xfbY\xad9\x18;@4\x85qp\xb9\x0fW\xe1\xccx\xc2^V*\xf6\t\xa5\xcf\xd5I\x12\xef\xe7\xf0\xc9\x9a\x89\x02\xc7:\xbd\x8e\xc4 R\xda\xedq\xba\xb3)\xadR\xb1\xdf\xf8\x12\x15\xb0\xff\x82\x06\x93P'
@@ -127,7 +131,7 @@ def main():
 
     print("===========================================================")
     print("Verifying signature...")
-    print("Signature valid: {}".format(rsa_verify(hashed_message_delahera, delahera_n, delahera_e, signature_delahera)))
+    print("Signature valid: {}".format(rsa_verify(encrypted_message_delahera, delahera_n, delahera_e, signature_delahera)))
 
     #print("\nMensaje de De La Hera: ", decrypted_delahera.decode("utf-16"))
 
