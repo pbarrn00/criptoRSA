@@ -72,9 +72,9 @@ def main():
 
 
     # My keys
-    barrio_n = 123355434931394847582156130589346765195239858952662033973669968405220821412574991703109181733654539246644904338901352138362092833002288793510559272266372536290821137928735835297624136288059785492583366524665701693180230633068234558088660840330170848973749265206460835623134857700697302798342737456620402409063
+    barrio_n = 137240983915996962747909454484640658542329656056449401370891990025072346702917945425463397482231359266614646060111542095646286224283115300273103159970060217155569265862077406621057638854015677632691187303616523985260804276248741993354084069774341050814080965415297141189501657346954323426277281084454908433239
     barrio_e = 65537
-    barrio_d = 21547721425982394908532941437460392876620930242307016874903852759555182012163487877339425248132767219976362434529238129300536166626641471353722058515120199875152893394899024737510268376182081351858353560598824321590099317711440609093139218884302631847656040275633159758135761177701388215160028530955592998913
+    barrio_d = 6883304303399331927802285379114299474016777994988314727651890858788360828425031457245497772618436576428007714719725328721017788718107328562456171121985868388459121123365468232335586419704900978200225152417136113477503589035247290364170055315820304822024943118646069037558371444580320459226977033054563966129
 
     print("")
     print("n_barrio:", barrio_n)
@@ -84,7 +84,7 @@ def main():
     print("===========================================================")
 
     # de la Hera's keys
-    delahera_n = 102177145502170449647535015823292055188749752771393005649892105979200067597554948297407387457859709511918845152650987194391543702482122356296402530264892095093397819813676815413255338683528599712279533202539803336778869663204648825602128229440285623432111299318482515655843275628377999479423128550587755875503
+    delahera_n = 110477620934049393733275265425319715013384221791352610600040838995728481009667690503849981506344012764292009379787793009565139234703193116888335807677802785350021945337615918588620239492464432226348696954426754149567553978837124726589912929545140618195782211815916207778575351484388869984100139595053059887809
     delahera_e = 65537
 
     
@@ -98,7 +98,7 @@ def main():
     # ================================ RSA SGIN ================================= #
     # =========================================================================== #
 
-    message_barrio = b"hola buenas tardes"
+    message_barrio = b"Hola buenas tardes"
     print("Mensaje de Barrio: {}".format(message_barrio))
     print("")
 
@@ -119,19 +119,22 @@ def main():
     # ============================ RSA VERIFY =============================== #
     # =========================================================================== #
     
-    encrypted_message_delahera = b'\xa5\x91\xa6\xd4\x0b\xf4 @J\x01\x173\xcf\xb7\xb1\x90\xd6,e\xbf\x0b\xcd\xa3+W\xb2w\xd9\xad\x9f\x14n'
+    encrypted_message_delahera = b'\x08\x80\xa6\xa2>\x7fh\xa15#\xba\x03T<G*\xed\x18\xf9\xe4\xf1\xe0\xa3hM\xcd}\x17\xfb\xa6\x8e\x92B\x9bmQX\xa2\xfe5\xdd/\xe6\x9e\xf7\xe4\x97\xfb\xb2\xd4\xeeai\xac\xe9d\xd0\xc4\x10\x83\xec\xbd\x856O\xb5\x9d@\xbf\x06\xfb\x1b\x0b\xc9\xf8\x9c\x18\x10&\xe8\xde\xa40\x1a\xe6\xe9\x98>\x99\xcd\x03\xf8\x96\x84\xd0\xab\x90\xa4\xc8v\xc4\xdb\x85\xaa\x90\x06n\x90\xa7u\xc0`\'\xe5\x15w\xc6\x0b`\x03\xa3p\xce\xd1cQ\xe2\xfaH,\x07<j\xae\x00j\xba\xa2,\xdc\x8db-[\xc9\xaa\xbd\x14\x97\x9a\xe42\x8cP\xca\xe2Y!\xc3]z\xfe*s\xdb\x95\xec\xeb\xed\x935D\x8a\xdd\xa9\xf2\xa1\xc6\xd8c\xfe\xd7\xb2\x98&5`\xc7J~\xb1zVa\x91%z\xb2\xe76h@\xe7\x07|Q\x93K"\x83\x93u\x8b\x14\x87\xb6C\x90d\x9bH\x832+=\x02\xfa\xda\xaf\xf6M#\x0eg\x9b\xa5U\xc0\x16\x11\x06M\x11\xd39\xdc\x13\xa9,\xd8Q\xf0\xc0\x9eh\x8c'
     print("Mensaje de de la Hera: {}".format(encrypted_message_delahera))
     print("")
 
-    signature_delahera = b'3\xe4\x90\xfd\xb6\x00>\xf2\xf1\x13\x82C\xbeC\x9c\xd6+K^\xf9\x0b\xbeGwU\xe4\xe1\x17sm\xa3\xfe\xe3eNq\x15\x0c\xda0\xef\xd8\x99\x1c:L\x19\xb2\x03\x93h\xe6p\xa1u\xde\x07\xa7$}\xf0r\x8e\x8dn}\xcf4\xfe.\x19\x90E$\x7fv3og\x0b\x15V\xb4\xff\x92I>\xc1K\x80\x1b\xdd\xbd\x9ay(\xf1\x1b\x89;;\xd5\xba\xf8\xe9\xae\x06\xe27ZA\xff\x96\n\x1b\x00\x81\x0cJ\xd06\x99@F\x8d\xd9\xeb\x9c\x8cVU\x94P4\x95\xd2"\xa80\x15\xa1{I\xcb>\x0c.J\xc5N\x08F\xe9\xe5$\xe6\xb1Lo9\xf5\x11\xf3\xbaU\x8e;y]\x8e\xbf\x0e\xef\x81\xd2\xd7\x16\xca\t\xef\xa0\xb7\xdb\'\x90%^\xb2\x14\xd9\xc2-\x88fn\xfbY\xad9\x18;@4\x85qp\xb9\x0fW\xe1\xccx\xc2^V*\xf6\t\xa5\xcf\xd5I\x12\xef\xe7\xf0\xc9\x9a\x89\x02\xc7:\xbd\x8e\xc4 R\xda\xedq\xba\xb3)\xadR\xb1\xdf\xf8\x12\x15\xb0\xff\x82\x06\x93P'
+    signature_delahera = b"d\x97\x8a\x8d'\xa2\xbe\x93\x95\x10\xe7Z\xf6%\xfc\xaa\x92{\x1b\xc0\x1a\xb4\xad_\xa5\x87t/Y\x99\x9b=y\x0f\xf00\xe7\xe4\xb2\xdb\xdb2\xc3\xd4\x03\x98N\xaa\xcb\x1f\x96\xf9\xe0 }\x16{^!j\xf9F\xc1\x05\xc5\xfc9\xfd$7S\xebz\xe4x\xc7@&\xdb\x0c\x0c\x9f\xf2\xe6h\xe2\xc2\xed\xf3[\x14\x11(q\xbev]LG\xcf]\xbe\xcc\x04\xa2\xe7\xf0\xd1Z8u#\xeen\xa9\x83\xf8\x1e\x1b\xf3(\xa7$\xdc\x9e\xec\xf3\xf1\x8bT\x07\tE\xfaB\xce\xf9\xa0\xe6\xfd\xc0\xbbw\xd5Jn_\x8e=^\xa7fV]\x93*\x19\x01\xd14u\x08p\x0cf\xf8q\xe8K[\x1c\xaa\xc7\x0f`,3\x04Mo\x90\x96\xb8\x0f\x7fW@l\x8d\xa2\xc6\xa5R/u-\xce\xf2\x88a\xcard>\xfd\xadk\xd9S\xd3vS0ha\x8e\xdd\xf6\xe4\x16\xa8JY\x9a\xc9\xbf2N/;\xb0\x7f;u\xe6;R?`R\xf7\xdcO\xb3\xec\xe1\xa0}S\xc6\xa4\x15g2\x8d\xd6"
 
+    decrypted_message_delahera = rsa_decrypt(encrypted_message_delahera, barrio_n, barrio_d)
+    print("Mensaje desencriptado de de la Hera: {}".format(decrypted_message_delahera))
+    print("")
 
     print("Firma del mensaje de de la Hera: {}".format(signature_delahera))
     print("")
 
     print("===========================================================")
     print("Verifying signature...")
-    print("Signature valid: {}".format(rsa_verify(encrypted_message_delahera, delahera_n, delahera_e, signature_delahera)))
+    print("Signature valid: {}".format(rsa_verify(sha256(decrypted_message_delahera), delahera_n, delahera_e, signature_delahera)))
 
     #print("\nMensaje de De La Hera: ", decrypted_delahera.decode("utf-16"))
 
